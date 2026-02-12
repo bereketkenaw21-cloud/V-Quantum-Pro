@@ -1,0 +1,17 @@
+name: Build APK
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build with Buildozer
+        uses: ArtemSerebrennkov/buildozer-action@v1
+        with:
+          python_version: 3.8
+          subcommand: android debug
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: Bereket-App
+          path: bin/*.apk
